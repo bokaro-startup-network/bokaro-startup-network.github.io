@@ -1,7 +1,7 @@
 {{ $ := hugo.Data.site }}
 <header class="site-header" id="top">
   <div class="wrap header-inner">
-    <a class="brand" href="#top">
+    <a class="brand" href="{{ "/" | relURL }}">
       <span class="brand-dot" aria-hidden="true"></span>
       <span class="brand-name">{{ $.brand.short }}</span>
     </a>
@@ -10,6 +10,6 @@
         <a href="{{ .anchor }}">{{ .label }}</a>
       {{ end }}
     </nav>
-    <a class="btn btn-ghost btn-small" href="#join">{{ $.hero.cta_primary }}</a>
+    <a class="btn btn-ghost btn-small" href="{{ "/#join" | relURL }}">{{ $.hero.cta_primary }}</a>
   </div>
 </header>

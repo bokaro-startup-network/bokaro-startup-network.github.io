@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="meetups-list">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h1>{{ .Title }}</h1>
+      <p class="lede">{{ .Description }}</p>
+    </div>
+    <div class="meetups-grid">
+      {{ range .Pages.ByDate.Reverse }}
+      <a class="meetup-card" data-reveal href="{{ .RelPermalink }}">
+        <span class="meetup-card-date">{{ .Date.Format "Jan 2006" }}</span>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Params.summary }}</p>
+        <span class="meetup-card-link">Read the recap &rarr;</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,22 @@
+{{ define "main" }}
+<article class="meetup-single">
+  <div class="wrap wrap-narrow">
+    <a class="meetup-back" href="{{ "/meetups/" | relURL }}">&larr; All meetup recaps</a>
+    <span class="meetup-card-date">{{ .Date.Format "January 2, 2006" }}</span>
+    <h1>{{ .Title }}</h1>
+    {{ if .Params.summary }}<p class="lede">{{ .Params.summary }}</p>{{ end }}
+
+    {{ if .Params.takeaways }}
+    <ul class="meetup-takeaways">
+      {{ range .Params.takeaways }}<li><span class="ember-dot" aria-hidden="true"></span>{{ . }}</li>{{ end }}
+    </ul>
+    {{ end }}
+
+    <div class="meetup-body">
+      {{ .Content }}
+    </div>
+
+    <a class="btn btn-primary" href="{{ "/#join" | relURL }}">Join the Community</a>
+  </div>
+</article>
+{{ end }}

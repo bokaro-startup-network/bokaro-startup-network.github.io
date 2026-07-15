@@ -11,6 +11,27 @@
       <button class="chip" data-filter="{{ .id }}" type="button">{{ .short }}</button>
       {{ end }}
     </div>
+    <div class="path-finder" data-reveal>
+      <div class="path-finder-row">
+        <label class="path-field">
+          <span>I'm a</span>
+          <select id="path-from">
+            <option value="">choose one</option>
+            {{ range $.nodes }}<option value="{{ .id }}">{{ .short }}</option>{{ end }}
+          </select>
+        </label>
+        <span class="path-finder-arrow" aria-hidden="true">&rarr;</span>
+        <label class="path-field">
+          <span>looking to meet a</span>
+          <select id="path-to">
+            <option value="">choose one</option>
+            {{ range $.nodes }}<option value="{{ .id }}">{{ .short }}</option>{{ end }}
+          </select>
+        </label>
+        <button class="btn btn-primary btn-small" id="path-find" type="button">Show the connection</button>
+      </div>
+      <p class="path-caption" id="path-caption"></p>
+    </div>
   </div>
   <div class="network-stage">
     <canvas id="network-canvas" aria-hidden="true"></canvas>

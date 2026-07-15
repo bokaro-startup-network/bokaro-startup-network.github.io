@@ -17,13 +17,31 @@
         colorB: "111,146,179",
       }, opts || {});
       this.particles = [];
+      this.trail = [];
+      this.mouse = { x: -9999, y: -9999 };
       this.running = false;
       this._resize = this._resize.bind(this);
       this._tick = this._tick.bind(this);
+      this._onMove = this._onMove.bind(this);
+      this._onLeave = this._onLeave.bind(this);
       this._resize();
       window.addEventListener("resize", this._resize);
+      canvas.addEventListener("mousemove", this._onMove);
+      canvas.addEventListener("mouseleave", this._onLeave);
       this._observe();
     }
+
+    _onMove(e) {
+      const rect = this.canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left, y = e.clientY - rect.top;
+      const last = this.trail[this.trail.length - 1];
+      if (!last || Math.hypot(x - last.x, y - last.y) > 16) {
+        this.trail.push({ x, y, life: 1 });
+        if (this.trail.length > 18) this.trail.shift();
+      }
+      this.mouse.x = x; this.mouse.y = y;
+    }
+    _onLeave() { this.mouse.x = -9999; this.mouse.y = -9999; }
 
     _observe() {
       const io = new IntersectionObserver((entries) => {
@@ -68,10 +86,19 @@
       const { ctx, w, h, particles, opts } = this;
       ctx.clearRect(0, 0, w, h);
 
+      const mx = this.mouse.x, my = this.mouse.y;
+      const repelR = 100;
       for (const p of particles) {
         p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > w) p.vx *= -1;
         if (p.y < 0 || p.y > h) p.vy *= -1;
+        const dx = p.x - mx, dy = p.y - my;
+        const dist = Math.hypot(dx, dy);
+        if (dist < repelR) {
+          const force = (1 - dist / repelR) * 2.2;
+          p.x += (dx / (dist || 1)) * force;
+          p.y += (dy / (dist || 1)) * force;
+        }
       }
 
       for (let i = 0; i < particles.length; i++) {
@@ -104,6 +131,16 @@
         }
       }
 
+      for (let i = this.trail.length - 1; i >= 0; i--) {
+        const t = this.trail[i];
+        t.life -= 0.045;
+        if (t.life <= 0) { this.trail.splice(i, 1); continue; }
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(${opts.colorA},${t.life * 0.55})`;
+        ctx.arc(t.x, t.y, t.life * 3.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       this._raf = requestAnimationFrame(this._tick);
     }
   }
@@ -118,6 +155,7 @@
       this.filter = "all";
       this.hovered = null;
       this.pinned = null;
+      this.path = null;
       this.mouse = { x: -9999, y: -9999 };
       this.t = 0;
 
@@ -180,6 +218,16 @@
 
     setFilter(id) { this.filter = id; }
 
+    setPath(fromId, toId) {
+      this.path = (fromId && toId && fromId !== toId) ? { from: fromId, to: toId } : null;
+    }
+    clearPath() { this.path = null; }
+
+    focusNode(id) {
+      const n = this.nodes.find((x) => x.id === id);
+      this.pinned = n || null;
+    }
+
     start() { if (this._raf) return; this._raf = requestAnimationFrame(this._tick); }
     stop() { if (this._raf) { cancelAnimationFrame(this._raf); this._raf = null; } }
 
@@ -230,31 +278,45 @@
       const { ctx, w, h, nodes, center } = this;
       ctx.clearRect(0, 0, w, h);
 
+      const repelR = 80;
       nodes.forEach((n, i) => {
         n.x = n.baseX + Math.cos(this.t + n.phase) * 10;
         n.y = n.baseY + Math.sin(this.t * 1.2 + n.phase) * 10;
+        const dx = n.x - this.mouse.x, dy = n.y - this.mouse.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < repelR) {
+          const force = (1 - dist / repelR) * 22;
+          n.x += (dx / (dist || 1)) * force;
+          n.y += (dy / (dist || 1)) * force;
+        }
       });
 
       const active = this.pinned || this.hovered;
+      const path = this.path;
       const isDimmed = (n) => {
+        if (path) return !(n.id === path.from || n.id === path.to);
         if (this.filter !== "all" && n.id !== this.filter) return true;
         if (active && active !== n && active !== center) return true;
         return false;
       };
 
       // links: center to every node, plus a light web between neighbors
-      ctx.lineWidth = 1;
       nodes.forEach((n) => {
+        const onPath = path && (n.id === path.from || n.id === path.to);
         const dim = isDimmed(n) || (active && active !== center && active !== n);
         const highlight = active === n;
-        ctx.strokeStyle = highlight
+        ctx.lineWidth = onPath ? 2.5 : 1;
+        ctx.strokeStyle = onPath
+          ? "rgba(255,150,60,0.9)"
+          : highlight
           ? "rgba(245,166,35,0.75)"
-          : dim ? "rgba(111,146,179,0.08)" : "rgba(111,146,179,0.28)";
+          : dim ? "rgba(111,146,179,0.06)" : "rgba(111,146,179,0.28)";
         ctx.beginPath();
         ctx.moveTo(center.x, center.y);
         ctx.lineTo(n.x, n.y);
         ctx.stroke();
       });
+      ctx.lineWidth = 1;
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const a = nodes[i], b = nodes[j];
@@ -271,17 +333,39 @@
         }
       }
 
-      // traveling sparks along a couple of edges for life
-      const sparkCount = 3;
-      for (let s = 0; s < sparkCount; s++) {
-        const n = nodes[(Math.floor(this.t * 6) + s * 3) % nodes.length];
-        const prog = (this.t * 0.6 + s / sparkCount) % 1;
-        const sx = center.x + (n.x - center.x) * prog;
-        const sy = center.y + (n.y - center.y) * prog;
-        ctx.beginPath();
-        ctx.fillStyle = "rgba(255,150,60,0.9)";
-        ctx.arc(sx, sy, 1.8, 0, Math.PI * 2);
-        ctx.fill();
+      if (path) {
+        // one bright spark travels from-node -> center -> to-node, back and forth
+        const fromNode = nodes.find((n) => n.id === path.from);
+        const toNode = nodes.find((n) => n.id === path.to);
+        if (fromNode && toNode) {
+          const cycle = (this.t * 0.45) % 2;
+          const a = cycle < 1 ? fromNode : center;
+          const b = cycle < 1 ? center : toNode;
+          const localProg = cycle < 1 ? cycle : cycle - 1;
+          const sx = a.x + (b.x - a.x) * localProg;
+          const sy = a.y + (b.y - a.y) * localProg;
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(255,180,90,1)";
+          ctx.arc(sx, sy, 3.4, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(255,150,60,0.25)";
+          ctx.arc(sx, sy, 10, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      } else {
+        // ambient traveling sparks along a couple of edges for life
+        const sparkCount = 3;
+        for (let s = 0; s < sparkCount; s++) {
+          const n = nodes[(Math.floor(this.t * 6) + s * 3) % nodes.length];
+          const prog = (this.t * 0.6 + s / sparkCount) % 1;
+          const sx = center.x + (n.x - center.x) * prog;
+          const sy = center.y + (n.y - center.y) * prog;
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(255,150,60,0.9)";
+          ctx.arc(sx, sy, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
 
       // center node
@@ -301,7 +385,8 @@
       // member nodes
       nodes.forEach((n) => {
         const dim = isDimmed(n);
-        const highlight = active === n;
+        const onPath = path && (n.id === path.from || n.id === path.to);
+        const highlight = active === n || onPath;
         const r = highlight ? n.r * 1.12 : n.r;
         ctx.beginPath();
         ctx.fillStyle = dim ? "rgba(111,146,179,0.18)" : "rgba(111,146,179,0.9)";

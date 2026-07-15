@@ -5,13 +5,15 @@ brand:
 
 nav:
   - label: "Why Join"
-    anchor: "#why-join"
+    anchor: "/#why-join"
   - label: "Network"
-    anchor: "#network"
+    anchor: "/#network"
   - label: "Opportunities"
-    anchor: "#opportunities"
+    anchor: "/#opportunities"
+  - label: "Meetups"
+    anchor: "/meetups/"
   - label: "Guidelines"
-    anchor: "#guidelines"
+    anchor: "/#guidelines"
 
 hero:
   eyebrow: "Bokaro Startup & Business Network"
@@ -125,6 +127,19 @@ board:
       title: "CA firm seeking startup clients"
       text: "Compliance and bookkeeping partnership for early-stage founders."
 
+story:
+  heading: "Connection of the Month"
+  lede: "One real pairing from the community, told in three steps. Add your first one once a member has a story worth sharing."
+  placeholder: true
+  steps:
+    - label: "The Problem"
+      text: "Add a real challenge a member faced — e.g. \"A D2C founder needed a compliance-savvy CA before a funding round.\""
+    - label: "The Introduction"
+      text: "Add how the community connected them — a post on the Opportunities Board, a meetup conversation, a warm intro."
+    - label: "The Outcome"
+      text: "Add the result — a hire, a partnership, a problem solved."
+  cta: "Share your story"
+
 shares:
   heading: "What Members Share"
   lede: "We encourage thoughtful discussions around:"
@@ -182,6 +197,8 @@ footer:
   tagline: "Forged by founders, in Bokaro."
   links:
     - label: "Join the Community"
-      anchor: "#join"
+      anchor: "/#join"
+    - label: "Meetup Recaps"
+      anchor: "/meetups/"
     - label: "Guidelines"
-      anchor: "#guidelines"
+      anchor: "/#guidelines"

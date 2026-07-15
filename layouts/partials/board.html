@@ -5,7 +5,7 @@
       <h2>{{ $.heading }}</h2>
       <p class="lede">{{ $.lede }}</p>
     </div>
-    <div class="board-grid">
+    <div class="board-grid" id="board-grid" data-endpoint="{{ "data/opportunities.json" | relURL }}">
       {{ range $i, $e := $.examples }}
       <div class="board-card" data-reveal style="--d: {{ $i }}">
         <span class="board-tag">{{ $e.tag }}</span>
@@ -13,6 +13,10 @@
         <p>{{ $e.text }}</p>
       </div>
       {{ end }}
+    </div>
+    <div class="board-footer">
+      <a class="btn btn-primary" href="{{ "/#join" | relURL }}">Post an opportunity</a>
+      <p class="board-footer-note">Opportunities are shared inside the community first — join to post yours.</p>
     </div>
   </div>
 </section>

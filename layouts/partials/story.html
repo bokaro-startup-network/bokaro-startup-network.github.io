@@ -1,0 +1,23 @@
+{{ $ := hugo.Data.site.story }}
+<section class="story">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      {{ if $.placeholder }}<span class="story-badge">Coming soon</span>{{ end }}
+      <h2>{{ $.heading }}</h2>
+      <p class="lede">{{ $.lede }}</p>
+    </div>
+    <div class="story-steps">
+      {{ range $i, $s := $.steps }}
+      <div class="story-step" data-reveal style="--d: {{ $i }}">
+        <span class="story-step-dot" aria-hidden="true"></span>
+        <span class="story-step-label">{{ $s.label }}</span>
+        <p>{{ $s.text }}</p>
+      </div>
+      {{ if lt (add $i 1) (len $.steps) }}<span class="story-connector" aria-hidden="true"></span>{{ end }}
+      {{ end }}
+    </div>
+    <div class="story-footer">
+      <a class="btn btn-ghost" href="{{ "/#join" | relURL }}">{{ $.cta }}</a>
+    </div>
+  </div>
+</section>
