@@ -1,0 +1,28 @@
+{{ $ := hugo.Data.site.different }}
+<section class="different" id="different">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h2>{{ $.heading }}</h2>
+      <p class="lede">{{ $.lede }}</p>
+    </div>
+    <div class="different-grid">
+      <div class="different-col different-not" data-reveal>
+        <h3>Not this</h3>
+        <ul>
+          {{ range $.not_this }}
+          <li><span class="mark mark-x" aria-hidden="true">&times;</span>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </div>
+      <div class="different-col different-yes" data-reveal style="--d: 1">
+        <h3>This</h3>
+        <ul>
+          {{ range $.this }}
+          <li><span class="mark mark-check" aria-hidden="true">&check;</span>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+    <p class="different-closing">{{ $.closing }}</p>
+  </div>
+</section>

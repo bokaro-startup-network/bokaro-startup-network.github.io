@@ -1,0 +1,14 @@
+{{ $ := hugo.Data.site.shares }}
+<section class="shares">
+  <div class="wrap shares-inner">
+    <div class="section-head section-head-left" data-reveal>
+      <h2>{{ $.heading }}</h2>
+      <p class="lede">{{ $.lede }}</p>
+    </div>
+    <ul class="shares-list" data-reveal style="--d: 1">
+      {{ range $.items }}
+      <li><span class="ember-dot" aria-hidden="true"></span>{{ . }}</li>
+      {{ end }}
+    </ul>
+  </div>
+</section>

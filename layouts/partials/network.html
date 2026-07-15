@@ -1,0 +1,23 @@
+{{ $ := hugo.Data.site.network }}
+<section class="network-section" id="network">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h2>{{ $.heading }}</h2>
+      <p class="lede">{{ $.lede }}</p>
+    </div>
+    <div class="chip-row" id="network-filters" role="group" aria-label="Filter by member type">
+      <button class="chip is-active" data-filter="all" type="button">Everyone</button>
+      {{ range $.nodes }}
+      <button class="chip" data-filter="{{ .id }}" type="button">{{ .short }}</button>
+      {{ end }}
+    </div>
+  </div>
+  <div class="network-stage">
+    <canvas id="network-canvas" aria-hidden="true"></canvas>
+    <div class="network-tooltip" id="network-tooltip" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<script type="application/json" id="network-data">
+{{ jsonify $.nodes | safeJS }}
+</script>

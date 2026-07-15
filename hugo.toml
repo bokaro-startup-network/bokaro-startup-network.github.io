@@ -1,0 +1,18 @@
+baseURL = "https://bokaro-startup-network.github.io/"
+locale = "en-us"
+title = "Bokaro Startup & Business Network"
+
+enableRobotsTXT = true
+summarylength = 40
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  description = "Bokaro Startup & Business Network — a community of founders, entrepreneurs, business owners, professionals and aspiring builders who learn, collaborate, and create opportunities together."
+  ogImage = "images/og-cover.png"
+
+[minify]
+  disableXML = true
+
+[build]
+  [build.buildStats]
+    enable = false

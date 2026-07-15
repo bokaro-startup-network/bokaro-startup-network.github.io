@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ partial "head.html" . }}
+<body>
+  <div class="grain"></div>
+  {{ partial "header.html" . }}
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  {{ $network := resources.Get "js/network.js" }}
+  {{ $app := resources.Get "js/app.js" }}
+  {{ $js := slice $network $app | resources.Concat "js/bundle.js" }}
+  {{ if hugo.IsProduction }}
+    {{ $js = $js | js.Build | minify | fingerprint }}
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+  {{ else }}
+    <script src="{{ $js.RelPermalink }}" defer></script>
+  {{ end }}
+</body>
+</html>

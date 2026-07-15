@@ -1,0 +1,187 @@
+brand:
+  name: "Bokaro Startup & Business Network"
+  short: "Bokaro Startup & Business Network"
+  location: "Bokaro Steel City, Jharkhand"
+
+nav:
+  - label: "Why Join"
+    anchor: "#why-join"
+  - label: "Network"
+    anchor: "#network"
+  - label: "Opportunities"
+    anchor: "#opportunities"
+  - label: "Guidelines"
+    anchor: "#guidelines"
+
+hero:
+  eyebrow: "Bokaro Startup & Business Network"
+  headline: "Great businesses are rarely built alone."
+  subheadline: "They're forged — through conversations, partnerships, mentorship, and the right network. Bokaro Startup & Business Network brings founders, entrepreneurs, business owners, and professionals together to learn, collaborate, solve problems, and create opportunities."
+  cta_primary: "Join the Community"
+  cta_secondary: "See who's inside"
+
+stats:
+  - value: 95
+    label: "Community Members"
+    note: "raw talent, one network"
+  - value: 1
+    label: "Meetups Organized"
+    note: "and counting"
+  - value: 10
+    label: "Industries Represented"
+    note: "one alloy"
+  - value: 5
+    label: "Collaborations Created"
+    note: "forged, not found"
+
+why_join:
+  heading: "Why Join?"
+  lede: "The right connection can change your business."
+  points:
+    - title: "Meet diverse builders"
+      text: "Founders, entrepreneurs, and professionals from industries across Bokaro."
+    - title: "Find your people"
+      text: "Collaborators, co-founders, partners, and talented people to build with."
+    - title: "Talk real problems"
+      text: "Discuss real startup and business challenges — not highlight reels."
+    - title: "Learn from experience"
+      text: "Borrow the hard-won lessons of people a few steps ahead of you."
+    - title: "Discover opportunities"
+      text: "Meaningful relationships surface openings you'd never find alone."
+    - title: "Show up in person"
+      text: "Networking meetups and community events, not just another group chat."
+
+network:
+  heading: "Who You'll Meet"
+  lede: "Every member is a node in the network — hover or tap a dot to see who's inside."
+  nodes:
+    - id: founders
+      label: "Startup Founders"
+      short: "Founders"
+      weight: 9
+      desc: "Building something from zero, looking for co-founders, early hires and honest feedback."
+    - id: owners
+      label: "Business Owners"
+      short: "Owners"
+      weight: 9
+      desc: "Running established businesses, hunting for partnerships and smarter operations."
+    - id: entrepreneurs
+      label: "Entrepreneurs"
+      short: "Entrepreneurs"
+      weight: 8
+      desc: "Between ideas and execution — testing, validating, and building momentum."
+    - id: marketers
+      label: "Marketers"
+      short: "Marketers"
+      weight: 7
+      desc: "Growth, branding, and demand — the people who get you noticed."
+    - id: cas
+      label: "Chartered Accountants"
+      short: "CAs"
+      weight: 6
+      desc: "Compliance, taxation, and the financial backbone every business needs."
+    - id: developers
+      label: "Developers"
+      short: "Developers"
+      weight: 8
+      desc: "Programmers and engineers turning ideas into working products."
+    - id: designers
+      label: "Website Designers"
+      short: "Designers"
+      weight: 6
+      desc: "Designers who make businesses look as good as they perform."
+    - id: freelancers
+      label: "Freelancers"
+      short: "Freelancers"
+      weight: 6
+      desc: "Independent talent available for projects, sprints, and collaborations."
+    - id: creators
+      label: "Creators"
+      short: "Creators"
+      weight: 5
+      desc: "Content, video, and community builders shaping how businesses are seen."
+    - id: professionals
+      label: "Other Professionals"
+      short: "Professionals"
+      weight: 7
+      desc: "Lawyers, consultants, and specialists from industries across Bokaro."
+
+meetup:
+  heading: "Watch Our First Meetup"
+  lede: "See how our community connects, learns, and grows together through real conversations and meaningful interactions."
+  cta: "Watch Meetup Highlights"
+
+board:
+  heading: "Community Opportunities Board"
+  lede: "Looking for a co-founder, hiring team members, seeking collaborators, or exploring partnership opportunities? Our Opportunities Board helps members connect and create value beyond conversations."
+  examples:
+    - tag: "Co-founder"
+      title: "Technical co-founder for a fintech idea"
+      text: "Non-technical founder with early traction seeking a hands-on CTO."
+    - tag: "Hiring"
+      title: "Marketing associate, part-time"
+      text: "D2C brand hiring for content and performance marketing."
+    - tag: "Collaboration"
+      title: "CA firm seeking startup clients"
+      text: "Compliance and bookkeeping partnership for early-stage founders."
+
+shares:
+  heading: "What Members Share"
+  lede: "We encourage thoughtful discussions around:"
+  items:
+    - "Business challenges"
+    - "Funding and fundraising"
+    - "Hiring opportunities"
+    - "Collaborations and partnerships"
+    - "Lessons learned"
+    - "Practical insights and resources"
+
+different:
+  heading: "What Makes Our Community Different?"
+  lede: "We're building a community, not a marketplace."
+  not_this:
+    - "Self-promotion or unsolicited selling"
+    - "Spam or low-effort conversations"
+    - "Lead generation or client hunting"
+    - "DM farming or unsolicited outreach"
+  this:
+    - "Respectful, high-quality discussions"
+    - "Genuine collaboration over competition"
+    - "Learning, sharing, and helping each other grow"
+    - "Quality relationships that build great businesses"
+  closing: "Quality conversations create quality relationships, and quality relationships create great businesses."
+
+vision:
+  heading: "Our Vision"
+  text: "To build Bokaro's most valuable startup and business network — a place where founders, entrepreneurs, professionals, and aspiring builders connect to create opportunities, solve meaningful problems, and help each other succeed."
+
+join:
+  heading: "Join Us"
+  lede: "Your next business partner, mentor, collaborator, employee, investor, or friend could already be part of this community."
+  lines:
+    - "Don't just grow your business."
+    - "Grow your network."
+  closing: "Because opportunities don't happen by chance — they happen through the right people."
+  cta: "Join the Community"
+
+guidelines:
+  heading: "Community Guidelines"
+  lede: "To keep the community valuable for everyone:"
+  rules:
+    - "No self-promotion or selling"
+    - "This is not a lead-generation group"
+    - "External links require admin approval"
+    - "Avoid duplicate posts"
+    - "No DM farming or unsolicited outreach"
+    - "Keep discussions relevant and valuable"
+    - "Be respectful and constructive"
+    - "Learn, share, and help others grow"
+  closing: "We maintain high standards to ensure the community remains focused, welcoming, and valuable for every member. Let's build Bokaro's most valuable startup ecosystem together."
+
+footer:
+  tagline: "Forged by founders, in Bokaro."
+  links:
+    - label: "Join the Community"
+      anchor: "#join"
+    - label: "Guidelines"
+      anchor: "#guidelines"

@@ -1,0 +1,16 @@
+{{ $ := hugo.Data.site.meetup }}
+<section class="meetup" id="meetup">
+  <div class="wrap meetup-inner">
+    <div class="meetup-copy">
+      <h2>{{ $.heading }}</h2>
+      <p class="lede">{{ $.lede }}</p>
+      <a class="btn btn-ghost" href="#join">{{ $.cta }}</a>
+    </div>
+    <div class="meetup-frame" role="img" aria-label="Meetup highlights preview">
+      <div class="meetup-glow" aria-hidden="true"></div>
+      <div class="play-btn" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      </div>
+    </div>
+  </div>
+</section>

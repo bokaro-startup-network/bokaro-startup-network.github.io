@@ -1,0 +1,15 @@
+{{ $ := hugo.Data.site }}
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span class="brand-name">{{ $.brand.short }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      {{ range $.nav }}
+        <a href="{{ .anchor }}">{{ .label }}</a>
+      {{ end }}
+    </nav>
+    <a class="btn btn-ghost btn-small" href="#join">{{ $.hero.cta_primary }}</a>
+  </div>
+</header>

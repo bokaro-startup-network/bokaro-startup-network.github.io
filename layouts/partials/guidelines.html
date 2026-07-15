@@ -1,0 +1,15 @@
+{{ $ := hugo.Data.site.guidelines }}
+<section class="guidelines" id="guidelines">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h2>{{ $.heading }}</h2>
+      <p class="lede">{{ $.lede }}</p>
+    </div>
+    <ol class="guidelines-list">
+      {{ range $.rules }}
+      <li>{{ . }}</li>
+      {{ end }}
+    </ol>
+    <p class="guidelines-closing">{{ $.closing }}</p>
+  </div>
+</section>

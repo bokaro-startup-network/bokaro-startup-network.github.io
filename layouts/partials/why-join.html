@@ -1,0 +1,18 @@
+{{ $ := hugo.Data.site.why_join }}
+<section class="why-join" id="why-join">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h2>{{ $.heading }}</h2>
+      <p class="lede">{{ $.lede }}</p>
+    </div>
+    <div class="why-grid">
+      {{ range $i, $p := $.points }}
+      <div class="why-card" data-reveal style="--d: {{ $i }}">
+        <span class="why-index">{{ printf "%02d" (add $i 1) }}</span>
+        <h3>{{ $p.title }}</h3>
+        <p>{{ $p.text }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+{{ $ := hugo.Data.site }}
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <div>
+        <div class="brand-name">{{ $.brand.name }}</div>
+        <div class="footer-tagline">{{ $.footer.tagline }}</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      {{ range $.footer.links }}
+        <a href="{{ .anchor }}">{{ .label }}</a>
+      {{ end }}
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; {{ now.Year }} {{ $.brand.name }}. {{ $.brand.location }}.</span>
+  </div>
+</footer>

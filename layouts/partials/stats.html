@@ -1,0 +1,12 @@
+{{ $stats := hugo.Data.site.stats }}
+<section class="stats" aria-label="Community stats">
+  <div class="wrap stats-grid">
+    {{ range $i, $s := $stats }}
+    <div class="stat-card" data-reveal style="--d: {{ $i }}">
+      <div class="stat-value" data-count="{{ $s.value }}">0</div>
+      <div class="stat-label">{{ $s.label }}</div>
+      <div class="stat-note">{{ $s.note }}</div>
+    </div>
+    {{ end }}
+  </div>
+</section>

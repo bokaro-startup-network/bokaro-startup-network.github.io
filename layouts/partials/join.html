@@ -1,0 +1,13 @@
+{{ $ := hugo.Data.site.join }}
+<section class="join" id="join">
+  <canvas id="join-canvas" class="join-canvas" aria-hidden="true"></canvas>
+  <div class="wrap join-inner">
+    <h2>{{ $.heading }}</h2>
+    <p class="lede">{{ $.lede }}</p>
+    {{ range $.lines }}
+    <p class="join-line">{{ . }}</p>
+    {{ end }}
+    <p class="join-closing">{{ $.closing }}</p>
+    <a class="btn btn-primary btn-large" href="#top">{{ $.cta }}</a>
+  </div>
+</section>

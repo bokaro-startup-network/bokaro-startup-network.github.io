@@ -1,0 +1,18 @@
+{{ $ := hugo.Data.site.board }}
+<section class="board" id="opportunities">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h2>{{ $.heading }}</h2>
+      <p class="lede">{{ $.lede }}</p>
+    </div>
+    <div class="board-grid">
+      {{ range $i, $e := $.examples }}
+      <div class="board-card" data-reveal style="--d: {{ $i }}">
+        <span class="board-tag">{{ $e.tag }}</span>
+        <h3>{{ $e.title }}</h3>
+        <p>{{ $e.text }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
