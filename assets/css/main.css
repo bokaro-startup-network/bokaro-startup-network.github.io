@@ -388,6 +388,36 @@ section { position: relative; padding: 110px 0; }
 .network-tooltip.is-visible { opacity: 1; }
 .network-tooltip strong { display: block; color: var(--text); font-family: var(--font-display); font-size: 14.5px; margin-bottom: 4px; }
 
+/* ---------- members ticker ---------- */
+.members-ticker {
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-soft);
+  padding: 14px 0;
+  overflow: hidden;
+}
+.members-ticker[hidden] { display: none; }
+.members-ticker-track {
+  display: flex;
+  gap: 40px;
+  white-space: nowrap;
+  animation: ticker-scroll 30s linear infinite;
+  width: max-content;
+}
+.members-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 /* ---------- meetup ---------- */
 .meetup-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .meetup-copy .lede { margin: 16px 0 28px; }

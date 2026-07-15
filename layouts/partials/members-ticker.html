@@ -1,0 +1,11 @@
+{{/*
+  Recent-activity ticker. Stays hidden until static/data/members-feed.json
+  has entries — never seeded with invented people, since that would be
+  fabricated social proof. Populate it for real once you have actual
+  signups: entries are { "text": "A Developer joined this week" } objects,
+  written however you're comfortable (anonymized by role, or with a real
+  name once you have the member's OK to be named).
+*/}}
+<div class="members-ticker" id="members-ticker" data-endpoint="{{ "data/members-feed.json" | relURL }}" hidden>
+  <div class="members-ticker-track" id="members-ticker-track"></div>
+</div>

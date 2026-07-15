@@ -226,6 +226,31 @@
         .catch(() => { /* server-rendered fallback already in the DOM stays as-is */ });
     }
 
+    // recent-activity ticker — stays hidden unless static/data/members-feed.json
+    // actually has entries (see the comment in members-ticker.html for the format).
+    const ticker = document.getElementById("members-ticker");
+    const tickerTrack = document.getElementById("members-ticker-track");
+    if (ticker && tickerTrack && ticker.dataset.endpoint) {
+      fetch(ticker.dataset.endpoint)
+        .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+        .then((items) => {
+          if (!Array.isArray(items) || !items.length) return;
+          tickerTrack.innerHTML = "";
+          const build = () => {
+            items.forEach((entry) => {
+              const el = document.createElement("span");
+              el.className = "members-ticker-item";
+              el.textContent = entry.text || "";
+              tickerTrack.appendChild(el);
+            });
+          };
+          build();
+          build(); // duplicate once for a seamless scroll loop
+          ticker.hidden = false;
+        })
+        .catch(() => { /* no real data yet — stays hidden, never fake */ });
+    }
+
     // count-up stats
     const statEls = document.querySelectorAll(".stat-value[data-count]");
     if (statEls.length) {
